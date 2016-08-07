@@ -1,0 +1,476 @@
+
+
+
+
+
+
+
+
+
+// 30 JUN 2016
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//ATOMIC DESIGN
+// ---
+// visitor.scss
+// ---
+
+/*-----------------------*\
+#IMPORTS
+\*-----------------------*/
+@import "../00_atoms/_scss";
+@import "../00_atoms/_reset";
+@import "../00_atoms/_grid";
+@import "../00_atoms/_typography.scss";
+@import "../00_atoms/_buttons";
+@import "../00_atoms/_helpers.scss";
+@import "../00_atoms/_sprites.scss";
+@import "../00_atoms/_inputs.scss";
+
+@import "../01_molecules/_modals";
+@import "../01_molecules/_forms";
+@import "../01_molecules/_cards";
+
+@import "../02_organisms/_navBar";
+@import "../02_organisms/_header";
+@import "../02_organisms/_articles";
+@import "../02_organisms/_footer";
+
+@import "../03_pages/_homepage.scss";
+
+
+/*------------------------------------*\
+#OTHERS - PLUGINS, JS, IE
+\*------------------------------------*/
+@import "../../plugins/jquery/jquery-pickmeup/css/_pickmeup";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//SUIT CSS
+
+// ---
+// input SCSS
+// ---
+.NavBar {
+    // ...
+    &-nav { ... }
+
+    &-logo { ... }
+
+    &-ul {
+        &-liHeader { ... }
+
+        &-liFooter { ... }
+    }
+}
+
+// ---
+// output CSS
+// ---
+.NavBar { ... }
+.NavBar-ul { ... }
+.NavBar-logo { ... }
+.NavBar-ul-liHeader { ... }
+.NavBar-ul-liFooter { ... }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//SCSSpower
+
+// @mixin media queries
+    // ---
+    // INPUT SCSS
+    // ---
+    .navBar {
+        padding-top: $safeArea;
+
+        @include media(phablet) {
+            padding-top: $safeArea*2;
+        }
+
+        @include media(desktop) {
+            padding-top: $safeArea*4;
+        }
+    }
+
+    // ---
+    // OUTPUT CSS
+    // ---
+    .navBar {
+        padding-top: 1rem;
+    }
+
+    @media (min-width: 37.5rem) {
+        .navBar {
+            padding-top: 2rem;
+        }
+    }
+
+    @media (min-width: 100rem) {
+        .navBar {
+            padding-top: 4rem;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// GridSystem
+
+// INPUT SCSS
+.header {
+    @extend %col-8-8;
+}
+
+.Article-Bg {
+    @extend %col-8-8;
+
+    @include media(phablet) {
+        //@extend %col-4-8; //FIXME ERROR!
+        @extend %colPha-4-8; //that will work;
+    }
+}
+
+
+// OUTPUT CSS
+.header,
+.Article-Bg {
+    width: 100%;
+}
+
+@media (min-width: 37.5rem) {
+    .Article-Bg {
+        width: 50%;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//FlexboxVSfloat
+
+    // ---
+    // INPUT SCSS
+    // ---
+    .ul {
+        @extend %flexbox-noFlex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+
+
+    // ---
+    // OUTPUT CSS
+    // ---
+    .flexbox .ul {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+    }
+
+    .no-flexbox .ul {
+        //stuff from @mixing cf
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//CALC
+// ---
+// OUTPUT SCSS
+// ---
+.link:after {
+    @include calc(width, 100%, calc(100% - #{$safeArea}/2));
+}
+
+// ---
+// INPUT CSS
+// ---
+.link:after {
+    width: 100%;
+    width: calc(100% - 0.5rem);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//SPRITES
+
+    // OUTPUT CSS
+    .spritesPayment-mb,
+    .spritesPayment-mbnet,
+    .spritesPayment-mbway,
+    .spritesPayment-paypal,
+    .spritesPayment-montepio,
+    .spritesPayment-meowallet {
+      display: inline-block;
+      background-image: url("../../media/icons/payment/payment.png");
+      background-repeat: no-repeat;
+    }
+
+    .spritesPayment-mb {
+      background-position: 0 0;
+      width: 50px;
+      height: 50px;
+    }
+
+    .spritesPayment-mbnet {
+      background-position: -100px 0;
+      width: 87px;
+      height: 40px;
+    }
+
+    // etc...

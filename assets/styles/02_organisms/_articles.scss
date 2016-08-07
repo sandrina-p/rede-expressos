@@ -1,0 +1,514 @@
+/*------------------------------------*\
+#ARTICLE
+\*------------------------------------*/
+$ArticleMarginBottom: $safeArea*5;
+
+%ArticleMarginBottom {
+    position: relative;
+    margin-bottom: $ArticleMarginBottom;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.ArticleBg {
+    @extend %ArticleMarginBottom;
+
+    &-bg {
+        background-position: center;
+        background-size: cover;
+        z-index: -1;
+    }
+
+    &-title {
+        padding-top: $safeArea*2;
+
+        > * {
+            @include grid8Prop(margin-left,2);
+            @include grid8Prop(padding-left,1);
+            @include grid8Prop(padding-right,1);
+        }
+    }
+
+    &-ul {
+        @extend %flexbox-noFlex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+
+        &-li {
+            color: $clrPrimaryDarker;
+            padding-top: $safeArea;
+
+            i {
+                color: $clrPrimary;
+                opacity: 0.6;
+            }
+
+
+            .iGroup {
+                display: block;
+                i {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+
+    &--under {
+
+        .ArticleBg {
+
+            &-title {
+                padding-top: $safeArea*3;
+            }
+
+            &-bg {
+                position: absolute;
+                @extend %col-5-8;
+                height: $safeArea*10;
+                background-size: cover;
+                @include bgImg2x('../../media/images/passenger-back', jpg);
+                background-position: 0% center;
+            }
+
+            &-title {
+                > * {
+                    padding-top: $safeArea/2*3;
+                    padding-bottom: $safeArea/2*3;
+                    background: $clrLight;
+                }
+            }
+
+            &-ul {
+                background: $clrLight;
+
+                &-li {
+
+                    @include noFlex {
+                        min-height: 70px;
+                    };
+
+                    &:nth-child(2n+1) {
+                        @extend %col-4-8;
+                        @include grid8Prop(padding-left,1);
+                        padding-right: 0;
+                    }
+
+                    &:nth-child(2n) {
+                        @extend %col-4-8;
+                        @include grid8Prop(padding-left,1);
+                    }
+
+                    i {
+                        font-size: $fontXXL;
+                        margin-bottom: $safeArea/4;
+                    }
+
+                    > i {
+                        display: block;
+                    }
+                }
+            }
+
+        }
+    }
+
+    &--right {
+
+        .ArticleBg {
+            &-title {
+                > * {
+                    padding-left: 0;
+                }
+            }
+
+            &-bg {
+                position: relative;
+                @extend %col-8-8;
+                @include bgImg2x('../../media/images/phone-bag', jpg);
+                background-position: center top;
+                background-repeat: no-repeat;
+                height: 33vw;
+            }
+
+            &-title {
+                padding-top: $safeArea;
+            }
+
+            &-ul {
+                padding-top: 0;
+
+                &-li {
+                    width: 100%;
+                    @include grid8Prop(padding-left,1);
+
+                    > i {
+                        font-size: $fontM;
+                        display: inline;
+                        margin: 0;
+                        margin-right: $safeArea/2;
+                    }
+
+                    &:last-child {
+                        @include grid8Prop(padding-left,2);
+                    }
+                }
+            }
+        }
+    }
+
+
+}
+
+.ArticleSpritesList {
+    //you can find ths sprits on ../00_atoms/_sprites.scss
+    @extend %ArticleMarginBottom;
+
+    &-title {
+        @include grid8Prop(padding-left, 1);
+        @include grid8Prop(padding-right, 1);
+
+        > * {
+            padding-bottom: $safeArea/2;
+        }
+    }
+
+    &-ul {
+        @extend %flexbox-noFlex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+
+        &-li {
+            @extend %col-3-8;
+            padding: $safeArea 0;
+
+            @include noFlex {
+                min-height: 85px;
+            }
+
+            &:nth-child(2n+1) {
+                @include grid8Prop(margin-left,2);
+            }
+
+            &:last-child {
+                @include grid8Prop(margin-left,1);
+            }
+        }
+    }
+}
+
+
+.ArticleCards {
+    @extend %ArticleMarginBottom;
+
+    &-title {
+        padding: $safeArea 0;
+        @include grid8Prop(padding-left,1);
+    }
+}
+
+
+// @include media(onlyPhablet) {
+// TODO - better media queries with less overwrite code
+// }
+
+@include media(phablet) {
+
+    %ArticleMarginBottom-pha {
+        margin-bottom: $safeArea*6;
+    }
+
+    .ArticleBg {
+        @extend %ArticleMarginBottom-pha;
+
+        &--under {
+
+            .ArticleBg {
+
+                &-bg {
+                    // @extend %colPha-5-8;
+                    height: 100%;
+                }
+
+                &-ul {
+                    @include grid8Prop(margin-left,2);
+                    @extend %colPha-6-8;
+
+                    &-li {
+                        &:nth-child(2n) {
+                            @extend %colPha-3-8;
+                        }
+
+                        &:nth-child(2n+1) {
+                            @extend %colPha-3-8;
+                            @include grid8Prop(padding-left,1);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--right {
+            @extend %flexbox-pha;
+            align-items: stretch;
+
+            .ArticleBg {
+                &-bg {
+                    position: absolute;
+                    height: 100%;
+                    // order: 2;
+                    right: 0;
+                    @extend %colPha-3-8;
+                }
+
+                &-content {
+                    @extend %colPha-5-8;
+                    padding: 0;
+                    @include grid8Prop(padding-left, 0.5);
+                    @include grid8Prop(padding-right, 1);
+
+                }
+
+                &-title {
+                    padding: 0;
+
+                    > * {
+                        margin: 0;
+                        padding: 0;
+                    }
+                }
+
+                &-ul {
+                    &-li {
+                        padding-left: 0;
+                        padding-right: 0;
+
+                        //max-mobile
+                        &:last-child {
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ArticleSpritesList {
+        @extend %ArticleMarginBottom-pha;
+
+        &-title {
+            @include grid8Prop(padding-left,2);
+            padding-bottom: $safeArea;
+        }
+
+        &-ul {
+            &-li {
+                @extend %colPha-2-8;
+                // padding: $safeArea 0;
+
+                //TODO-ONLY-MOB
+                &:nth-child(2n+1) {
+                    margin-left: 0;
+                }
+
+                &:nth-child(3n+1) {
+                    @include grid8Prop(margin-left,2);
+                }
+            }
+        }
+    }
+
+    .ArticleCards {
+        @extend %ArticleMarginBottom-pha;
+    }
+}
+
+
+// @include media(onlyTablet) {
+// TODO - better media queries with less overwrite code
+// }
+
+@include media(tablet) {
+    .ArticleBg {
+
+        &--under {
+
+            .ArticleBg {
+
+                &-title {
+                    > * {
+                        @include grid8Prop(margin-left,1);
+                    }
+                }
+
+                &-bg {
+                    @extend %colTab-4-8;
+                    height: 100%;
+                }
+
+                &-ul {
+                    @include grid8Prop(margin-left,1);
+                    @extend %colTab-5-8;
+                    &-li {
+
+                        &:nth-child(2n) {
+                            @extend %colTab-2-8;
+                            padding-left: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        &--right {
+            .ArticleBg {
+                &-bg {
+                    @extend %colTab-2-8;
+                }
+
+                &-content {
+                    @extend %colTab-4-8;
+                    @include grid8Prop(padding-right,0.5);
+                    @include grid8Prop(padding-left,0.5);
+                }
+            }
+        }
+    }
+
+    .ArticleSpritesList {
+        &-title {
+            @include grid8Prop(padding-left,1);
+        }
+
+        &-ul {
+            &-li {
+                @extend %colTab-1-8;
+
+                &:nth-child(3n+1) {
+                    @include grid8Prop(margin-left,1.5);
+                }
+
+                &:nth-child(3n-1) {
+                    @include grid8Prop(margin-left,0.5);
+                }
+
+                &:nth-child(3n) {
+                    @include grid8Prop(margin-left,0.5);
+                }
+
+                &:last-child {
+                    @include grid8Prop(margin-left,1);
+                }
+            }
+        }
+    }
+
+    .ArticleCards {
+
+        &-title {
+            @include grid8Prop(padding-left,0.5);
+        }
+    }
+
+}
+
+@include media(laptop) {
+
+    %ArticleMarginBottom-lap {
+        margin-bottom: $safeArea*7;
+    }
+
+    .ArticleBg {
+        @extend %ArticleMarginBottom-lap;
+
+        &--under {
+
+            .ArticleBg {
+                &-bg {
+                    @extend %colLap-5-8;
+                }
+
+                &-title {
+                    padding-top: $safeArea*4;
+
+                    > * {
+                        @include grid8Prop(margin-left,2);
+                    }
+                }
+
+                &-ul {
+                    @include grid8Prop(margin-left,2);
+                    &-li {
+                        padding-top: $safeArea*2;
+
+                        &:nth-child(3n+1),
+                        &:nth-child(3n-1),
+                        &:nth-child(3n) {
+                            @extend %colLap-1-8;
+                            padding-left: 0;
+                        }
+
+                        &:nth-child(3n+1) {
+                            @include grid8Prop(margin-left, 1);
+                        }
+                    }
+                }
+            }
+        }
+
+        &--right {
+            .ArticleBg {
+                &-bg {
+                    @extend %colLap-3-8;
+                }
+
+                &-title {
+                    @include grid8Prop(padding-left,0.5);
+                }
+
+                &-content {
+                    @extend %colLap-4-8;
+                }
+
+                &-ul {
+                    &-li {
+                        &:last-child {
+                            @include grid8Prop(padding-left,0.5);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ArticleSpritesList {
+        &-title {
+            @include grid8Prop(padding-left,2);
+        }
+
+        &-ul {
+            &-li {
+                // @extend %colab-1-8;
+
+                &:nth-child(1n) {
+                    margin-left: 0;
+                }
+
+                &:first-child {
+                    @include grid8Prop(margin-left,1);
+                }
+
+                &:last-child {
+                    @include grid8Prop(margin-left,2);
+                }
+            }
+        }
+    }
+
+    .ArticleCards {
+        &-title {
+            @include grid8Prop(padding-left,1);
+        }
+    }
+
+}

@@ -1,0 +1,42 @@
+---
+layout: post
+#date:   2016-06-09 22:41:15 +0100
+#categories: jekyll update
+title:  Sempre a pensar <span class="nowrap">em si</span>
+articleClass: ArticleBg ArticleBg--right
+ul:
+    - fa: euro
+      text: Até 40% de desconto nas viagens
+    - fa: clock-o
+      text: Horários e preços flexiveis
+    - fa: plug
+      text: Histórico de viagens
+---
+<div class="ArticleBg-bg"></div>
+
+<div class="ArticleBg-content">
+    <div class="ArticleBg-title">
+        <h3 class="f-h3">{{page.title}}</h3>
+    </div>
+
+    <ul class="ArticleBg-ul">
+        {% for li in page.ul %}
+        <li class="ArticleBg-ul-li">
+            {% if li.fa %}
+                <i class="fa fa-{{li.fa}}"></i>
+            {% else %}
+                <span class="iGroup">
+                    {% for fa in li.fa-group %}
+                    <i class="fa fa-{{fa.fa}}"></i>
+                    {% endfor %}
+                </span>
+            {% endif %}
+
+            {{li.text}}
+        </li>
+        {% endfor %}
+        <li class="ArticleBg-ul-li">
+            <a href="{{ page.url | prepend: site.baseurl }}" class="link-more">Seja cliente RFLEX</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,67 @@
+.FormCta {
+    position: relative;
+    @extend %col-7-8;
+    @extend %cf;
+    max-width: $safeArea*32;
+    background: $grdBothSoft;
+    padding: $safeArea;
+    z-index: 20;
+    display: none;
+
+    &-fieldset {
+        width: 100%;
+        @extend %cf;
+    }
+
+    &-bottom {
+        width: 100%;
+        text-align: right;
+        padding: $safeArea 0;
+    }
+
+    &.js-isModalVisible { //2nd class lvl because display:flexbox
+        position: fixed;
+        display: block;
+        @include centery;
+        left: 0;
+        @include grid8Prop(margin-left, 0.5);
+        max-height: 95%;
+        overflow: scroll;
+    }
+}
+
+
+@include media(phablet) {
+    .FormCta {
+        &.js-isModalVisible {
+            @include centerxy;
+            margin: auto;
+        }
+    }
+}
+
+
+
+@include media(tablet) {
+    .FormCta {
+        display: block;
+        min-width: $safeArea*30;
+        @extend %colTab-4-8;
+        margin-top: $safeArea*3;
+
+        &-fieldset {
+
+            &--66 {
+                width: (100%/3*2);
+            }
+
+            &--33 {
+                width: (100%/3);
+            }
+        }
+
+        .Modal-header {
+            display: none;
+        }
+    }
+};

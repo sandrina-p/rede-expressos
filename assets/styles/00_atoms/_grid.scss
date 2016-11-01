@@ -30,6 +30,7 @@ that aren't even used.
 %colDes-*   --> @media >=desktop
 \*------------------------------------*/
 
+// grid system - placeholders width vw units and % as fallback
 $columns: 8;
 @for $i from 1 through $columns {
     %col-#{$i}-#{$columns} {

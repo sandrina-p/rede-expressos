@@ -1,0 +1,27 @@
+/*------------------------------------*\
+#SPRITES
+\*------------------------------------*/
+
+// FIXME find or create svg for these logotypes... phase3
+%spritesPayment {
+    display: inline-block;
+    background-image: url('../../media/icons/payment/payment.png');
+    // @include bgImg2x('../../media/icons/payment/payment', png);
+    background-repeat: no-repeat;
+}
+
+$spritesPayment:  (mb, 0 0, 50px, 50px),
+                (mbnet, -100px 0, 87px, 40px),
+                (mbway, 0 -66px, 85px, 39px),
+                (paypal, -100px -59px, 45px, 47px),
+                (montepio, 0 -119px, 51px, 45px),
+                (meowallet, -100px -122px, 63px, 40px);
+
+@each $payment,$coordinates, $width, $height in $spritesPayment {
+    .spritesPayment-#{$payment} {
+        @extend %spritesPayment;
+        background-position: $coordinates;
+        width: $width;
+        height: $height;
+    }
+}

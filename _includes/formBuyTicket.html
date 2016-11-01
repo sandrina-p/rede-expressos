@@ -1,0 +1,87 @@
+<form name="buyTicket" action="http://dxd.andr3.net/projecto-ltd/" method="POST" novalidate
+    class="FormCta" id="Modal-buyTicket">
+
+    <input type="hidden" name="aluna" value="Sandrina Pereira">
+
+    <div class="Modal-header">
+        <p class="Modal-header-title">Pesquisar</p>
+        <button type="button" name="button" class="button-closeModal" data-close="modal">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+
+    <fieldset class="FormCta-fieldset">
+        <legend class="sr-only">Percurso</legend>
+        <p class="Input50">
+            <label for="ticketFrom" class="LabelPlaceholder">Origem</label>
+            <input id="ticketFrom"
+                type="search"
+                name="ticketFrom"
+                value=""
+                placeholder="ex: Porto"
+                minlength="3"
+                maxlength="20"
+                required
+                class="InputText js-inValidation js-mandatory-length fa-asterisk">
+        </p>
+
+        <p class="Input50">
+            <label for="ticketTo" class="LabelPlaceholder">Destino</label>
+            <input id="ticketTo"
+                type="search"
+                name="ticketTo"
+                value=""
+                placeholder="ex: Lisboa"
+                minlength="3"
+                maxlength="20"
+                required
+                class="InputText js-inValidation js-mandatory-length fa-asterisk">
+        </p>
+    </fieldset>
+
+    <fieldset class="FormCta-fieldset FormCta-fieldset--66">
+        <legend class="sr-only">Data</legend>
+        <p class="Input50">
+            <label for="ticketGo" class="LabelPlaceholder">Ida</label>
+            <input id="ticketGo"
+                type="text"
+                name="ticketGo"
+                value=""
+                placeholder="dd-mm-yyyy"
+                required
+                class="InputText js-inValidation js-mandatory-date fa-asterisk jq-pickmeup-simple"> <!-- a calendar generated w/js because type="data" doesn't work yet -->
+
+        <p class="Input50">
+            <label for="ticketBack" class="LabelPlaceholder">Volta (opcional)</label>
+            <input id="ticketBack"
+                type="text"
+                name="ticketBack"
+                value=""
+                placeholder="dd-mm-yyyy"
+                class="InputText js-inValidation js-mandatoryPartial-date jq-pickmeup-simple"> <!-- a calendar generated w/js because type="data" doesn't work yet -->
+        </p>
+    </fieldset>
+
+    <fieldset class="FormCta-fieldset FormCta-fieldset--33">
+        <legend class="sr-only">Passageiros</legend>
+        <p class="Input100">
+            <label for="ticketNr" class="LabelPlaceholder js-LabelPlaceholder-isActive">Passageiros</label>
+            <select id="ticketNr" name="ticketNr" class="InputSelect js-inValidation js-labelIgnore">
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </p>
+    </fieldset>
+
+    <div class="FormCta-bottom">
+        <button type="submit" name="submit" class="ButtonFormSubmit"
+            data-error="Upps... tente novamente."
+            data-mandatory="Primeiro preciso de saber qual é o percurso e data que deseja."
+            data-success="É bom viajar consigo, mas isto é apenas um conceito">
+            Pesquisar
+        </button>
+    </div>
+</form>

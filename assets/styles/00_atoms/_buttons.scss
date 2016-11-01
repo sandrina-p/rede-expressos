@@ -1,0 +1,306 @@
+// // -------- BUTTONS AND LINKS -------- //
+
+a, button {
+    &:focus {
+        animation-name: flash;
+        animation-duration: 250ms;
+    }
+}
+
+a, button {
+    .fa:first-child {
+        margin-right: $safeArea/4;
+    }
+
+    .fa:last-child {
+        margin-left: $safeArea/4;
+    }
+
+    &:focus a, //links inside
+    &:focus .fa { //links with font-awesome
+        animation-name: flash;
+        animation-duration: 250ms;
+    }
+}
+
+@keyframes flash {
+    50% {color: transparent;}
+}
+
+
+//set main base for each button
+%btn-link-base {
+    position: relative;
+    cursor: pointer;
+    transition: color $speed/2;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-weight: 400;
+    padding: $safeArea/4;
+
+    &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+    }
+}
+
+%btn-base {
+    @extend %btn-link-base;
+    text-transform: uppercase;
+}
+
+%link-base {
+    @extend %btn-link-base;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+
+// ----- BTN - SOLID BACKGROUND
+@mixin btnBg($clr) {
+    color: white;
+    background: $clr; //poor browsers
+    box-shadow: 0 0 0 0 darken($clr, 0%);
+    transition: box-shadow $speed/2;
+
+    &:hover,
+    &:active,
+    &:focus {
+        background: darken($clr, 15%);
+    }
+}
+
+$btnBg:    (primary, $clrPrimary),
+            (light, $clrLight);
+
+@each $btnClass, $clr in $btnBg {
+    %btnBg-#{$btnClass} {
+        @include btnBg($clr);
+    }
+}
+
+
+// ----- BTN - GRADIENT BACKGROUND
+@mixin btnBgGrd($clr1, $clr2) {
+    color: white;
+    background: $clr2; //poor browsers
+    background: linear-gradient(to top, $clr1 -100%, $clr2);
+    box-shadow: 0 0 0 0 darken($clr2, 0%);
+    transition: box-shadow $speed/2;
+
+    &:hover,
+    &:active,
+    &:focus {
+        box-shadow: 0 0px 0 1px darken($clr2, 15%);
+    }
+}
+
+$btnGrd:    (primary, $clrPrimary, $clrPrimarySoft),
+            (secondary, $clrSecondary, $clrPrimary);
+
+@each $btnGrd, $clr1, $clr2 in $btnGrd {
+    %btnBgGrd-#{$btnGrd} {
+        @include btnBgGrd($clr1, $clr2);
+    }
+}
+
+
+
+// ----- BTN - CLEAR
+$btnClear:  (primary, $clrPrimary),
+            (passive, $clrGray),
+            (passiveDark, $clrGrayDark),
+            (light, $clrLight);
+
+
+@each $btnClr, $color in $btnClear {
+    %btn-#{$btnClr} {
+        color: $color;
+
+        &:focus,
+        &:hover {
+            color: darken($color, 10%);
+        }
+
+        &:focus {
+            background-color: rgba($color, 0.2);
+            box-shadow: $boxShadow rgba($color, 0.5);
+        }
+    }
+}
+
+
+//set display each button
+%btn-block {
+    display: block;
+}
+
+%btn-inblock {
+    display: inline-block;
+}
+
+
+//set size each button
+%btn-sm {
+    padding: $safeArea/4;
+    font-size: 0.8rem;
+}
+
+%btn-md {
+    padding: $safeArea/2;
+    font-size: 1rem;
+}
+
+%btn-lg {
+    padding: $safeArea/4*3 $safeArea/2;
+    font-size: 1.2rem;
+}
+
+
+//lets prepare the fun. all components of each button
+@mixin btnSet($size, $bg:null, $clear:null, $type:btn, $display:inblock, $color:null) {
+
+    //extend the main base of each button
+    @if ($type == btn) {
+        @extend %btn-base;
+    }
+
+    @if ($type == link) {
+        @extend %link-base;
+    }
+
+    //extend the right class depending on the display
+    @if ($display) {
+        @extend %btn-#{$display};
+    }
+
+    //extend the right class depending on the size
+    @if ($size) {
+        @extend %btn-#{$size};
+    }
+
+    @if ($bg) {
+        @extend %btnBg#{$bg};
+    }
+
+    @if ($clear) {
+        @extend %btn-#{$clear};
+    }
+
+    @if ($color) {
+        color: $color;
+
+        &:hover {
+            color: darken($color, 15%);
+        }
+    }
+
+    //TODO different focus between button and link
+    // @if ($clear && $type == btn) {
+    //     @extend %btn-#{$clear};
+    // }
+    //
+    // @if ($clear && $type == link) {
+    //     @extend %link-#{$clear};
+    // }
+
+}
+
+
+
+
+
+
+
+
+
+
+// NOTE: Should the buttons be called here or in its component/page ?
+    // Ex: buttonNavBar should be written on navBar.scss, right?
+
+.buttonNavbar {
+    @include btnSet(md, $clear:passive);
+}
+
+.button-cta-mobile {
+    @include btnSet(lg, $bg:Grd-primary);
+    max-width: 250px;
+}
+
+@include media(tablet) {
+    .button-cta-mobile {
+        display: none;
+    }
+}
+
+.button-closeNavBar {
+    @include btnSet(md, $clear:light);
+}
+
+.button-register {
+    @include btnSet(sm, $clear:primary);
+}
+
+.button-login {
+    @include btnSet(sm, $clear:passive);
+}
+
+.button-closeModal {
+    @include btnSet(md, $clear:light);
+}
+
+.ButtonFormSubmit {
+    @include btnSet(md, $bg:-light, $color:$clrPrimary);
+    padding-left: $safeArea*2;
+    padding-right: $safeArea*2;
+    margin: 0 $safeArea;
+
+    &:hover {
+        background: $clrLight;
+    }
+}
+
+.link-more {
+    @include btnSet(md, $clear:passiveDark, $type:link);
+    padding: $safeArea/4;
+    line-height: 1;
+
+    &:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: $safeArea/4;
+        @include calc(width, 100%, 100% - #{$safeArea}/2);
+        height: 2px;
+        background: $clrSecondary;
+    }
+
+    &:hover {
+        text-decoration: none;
+        &:after {
+            background: $clrPrimary;
+        }
+    }
+
+    &:focus {
+        box-shadow: none;
+        background-color: rgba($clrSecondary, 0.2);
+    }
+}
+
+.link-simple {
+    @include btnSet(md, $clear:primary, $type:link);
+}
+
+.link-nav {
+    @include btnSet(md, $clear:passiveDark, $type:null, $display:block);
+    @extend %btn-link-base;
+    font-size: inherit;
+
+    &:hover {
+        background: $clrGrayLighter;
+    }
+}

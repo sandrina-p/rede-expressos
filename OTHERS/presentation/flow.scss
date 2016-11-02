@@ -1,0 +1,434 @@
+
+
+
+
+
+
+
+
+
+#HelloWord {
+    content: 'Rede Expressos';
+    perspective: 'Sandrina Pereira';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.Support {
+
+    &-browsers {
+        // IE9+,
+        // Android 4.0+,
+        // Safari
+    }
+
+
+    &-flex { //to align it:
+        display: table;
+        display: flex;
+    }
+
+
+    &-viewports { //to fit it
+        width: 50%;
+        width: 50vw;
+    }
+
+
+    &-calc { //to make it perfect
+        width: 95%;
+        width: calc(100% - 10px);
+    }
+
+
+    &:focus { //keyboard navigation
+        animation-name: flash;
+        animation-duration: 250ms;
+    }
+
+    //@media2x
+
+}
+
+
+
+.Metholodogy {
+
+
+    &-AtomicDesign {
+        /*
+        http://bradfrost.com/blog/post/atomic-web-design/
+        Atomic design is methodology
+        for creating design systems.
+        There are five distinct
+        levels in atomic design:
+        */
+        &-Atoms {
+            // _buttons.scss
+            // _inputs.scss
+            // _typography.scss
+        }
+
+        &-Molecules {
+            // _modal.scss
+        }
+
+        &-Organisms {
+            // _navBar.scss
+            // _footer.scss
+        }
+
+        &-Pages {
+            // _homepage.scss
+            // _about.scss
+        }
+
+        &-Templates {
+            // visitor.scss
+        }
+
+    }
+
+
+    &-SuitCss {
+        /*
+        https://suitcss.github.io/
+        SUIT CSS is a reliable and testable styling
+        methodology for component-based UI development.
+        The SUIT CSS naming convention helps to scope
+        component CSS.
+        */
+
+        .MyComponent {}
+        .MyComponent.is-animating {} //.js-xxx
+        .MyComponent--modifier {}
+
+        .MyComponent-part {}
+        .MyComponent-anotherPart {}
+
+    }
+
+}
+
+
+
+.OpenSource {
+
+    &-jQuery {
+        /* @source https://jquery.com/ */
+    }
+
+    &-font-awesome {
+        /*
+        @package   Font Awesome 4.6.3
+        @author    @davegandy @fontawesome
+        @Source    http://fontawesome.io
+        */
+    }
+
+    &-modernizr {
+        /*
+        @package   modernizr 3.3.1 (Custom Build) - flexbox
+        @author    @modernizr
+        @Source    https://modernizr.com/download/?-flexbox-setclasses
+        */
+    }
+
+    &-autoComplete {
+        /*
+        @package   jQuery autoComplete v1.0.7
+        @author    Simon Steinberger / Pixabay
+        @Source    https://github.com/Pixabay/jQuery-autoComplete
+        */
+    }
+
+    &-pickmeup {
+        /*
+        @package   PickMeUp - jQuery datepicker plugin
+        @author    Nazar Mokrynskyi <nazar@mokrynskyi.com>
+        @Source    https://github.com/nazar-pc/PickMeUp
+        */
+    }
+
+}
+
+
+
+.SCSSpower {
+
+
+    $safeArea: 1rem; //BEST FRIEND
+
+
+    &-mediaQueries {
+
+        $mobile-width: rem(450);
+        $phablet-width: rem(550);
+        $tablet-width: rem(750);
+        $laptop-width: rem(1100);
+        $desktop-width: rem(1600);
+
+
+        @mixin media($media) {
+
+            @if $media == phablet {
+                @media (min-width: $phablet-width) {
+                    @content;
+                }
+            }
+
+            @if $media == desktop {
+                @media (min-width: $desktop-width) {
+                    @content;
+                }
+            }
+        }
+    }
+
+
+    &-GridSystem {
+        //because Bootstrap sucks
+
+        &-oAndreEnsinou {
+            %col-1-8 { width: 12.5% };
+            %col-2-8 { width: 25% };
+            %col-3-8 { width: 37.5% };
+            %col-4-8 { width: 50% };
+            %col-5-8 { width: 62.5% };
+            %col-6-8 { width: 75% };
+            %col-7-8 { width: 87.5% };
+            %col-8-8 { width: 100% };
+
+            /* HUMMM:
+                - useless classes
+                - DOM elements with too many classes.
+            */
+        }
+
+        &-euExperimentei {
+
+            //transform class into placeholders
+            &-placeholders {
+                $columns: 8;
+                @for $i from 1 through $columns {
+                    %col-#{$i}-#{$columns} {
+                        width: percentage($i / $columns); // poor browsers
+                        width: ($i / $columns * 100vw);
+                    }
+                }
+                // COMPILED
+                %col-1-8 { width: 12.5% };
+                %col-2-8 { width: 25% };
+                // etc ....
+            }
+
+
+            //replicate %placeholders for each @media
+            //to use @extend in each scope (@media)
+            &-forEachMedia {
+
+                $colDevices:    (Pha, phablet),
+                                (Tab, tablet),
+                                (Lap, laptop);
+
+                @each $className, $media in $colDevices {
+                    @include media($media) {
+                        @for $i from 1 through $columns {
+                            %col#{$className}-#{$i}-#{$columns} {
+                                width: percentage($i / $columns); // poor browsers
+                                width: ($i / $columns * 100vw);
+                            }
+                        }
+                    }
+                }
+
+                // COMPILED
+                %colPha-1-8 { width: 12.5% };
+                %colPha-2-8 { width: 25% };
+                // .etc...
+                %colTab-1-8 { width: 12.5% };
+                %colTab-2-8 { width: 25% };
+                // .etc...
+                %colLap-1-8 { width: 12.5% };
+                %colLap-2-8 { width: 25% };
+                // .etc...
+
+            }
+
+        }
+    }
+
+
+    &-flexbox {
+
+        //Flexbox with a clearfix backup.
+        @mixin flexbox($noFlex:null) {
+
+            .flexbox & {
+                display: flex;
+
+                & > * {
+                    // this is to prevent bugs on IE 10 11
+                    flex-grow: 0;
+                    flex-shrink: 1;
+                    flex-basis: auto;
+                }
+            }
+
+            @if ($noFlex) {
+                .no-flexbox & {
+                    @include cf;
+                }
+            }
+        }
+
+        %flexbox-noFlex {
+            @include flexbox(true);
+        }
+
+    }
+
+    &-calc {
+
+        @mixin calc($prop, $valBackup, $valCal) {
+            #{$prop}: $valBackup; // poor browsers
+            #{$prop}: calc($valCal);
+        }
+    }
+
+    &-sprites {
+
+        //common for all sprites
+        %spritesPayment {
+            display: inline-block;
+            background-image: url('../../media/icons/payment/payment.png');
+            background-repeat: no-repeat;
+        }
+
+        $spritesPayment:(mb, 0 0, 50px, 50px),
+                        (mbnet, -100px 0, 87px, 40px),
+                        (mbway, 0 -66px, 85px, 39px),
+                        (paypal, -100px -59px, 45px, 47px),
+                        (montepio, 0 -119px, 51px, 45px),
+                        (meowallet, -100px -122px, 63px, 40px);
+
+        @each $payment, $coordinates, $width, $height in $spritesPayment {
+            .spritesPayment-#{$payment} {
+                @extend %spritesPayment;
+                background-position: $coordinates;
+                width: $width;
+                height: $height;
+            }
+        }
+    }
+}
+
+
+
+.Helpers {
+
+    .no-wrap {
+        white-space: nowrap;
+    }
+
+}
+
+
+
+.Javascript {
+
+    .js-modal { /*TODO*/ }
+
+    .js-navbar { /*TODO*/ }
+
+    .js-forms {
+
+        &-inputs {}
+
+        &-validation {}
+
+        &-submit {}
+
+    }
+
+}
+
+
+.Uppss {
+
+    &-closeNavBar {
+        /*
+        fechar a navbar no background
+        não funciona em nenhum mobile que eu testei (chrome e safari),
+        mas no browser do pc funciona (:
+        */
+    }
+
+    &-NavBarMobileSafari {
+        /*
+        Safari, na navBar de mobile/phablet,
+        o footer não aparece. Faço inspect element
+        e reescrevo algumaa propriedade e aparece :D
+        */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#ShutDown {
+    cursor: progress;
+}
